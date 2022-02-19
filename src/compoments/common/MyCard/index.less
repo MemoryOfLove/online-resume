@@ -1,0 +1,101 @@
+.MyCard {
+  border-color: var(--border-color);
+  background-color: var(--card-color);
+}
+
+
+.MyCard {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  color: #000000d9;
+  font-size: 14px;
+  font-variant: tabular-nums;
+  line-height: 1.5715;
+  list-style: none;
+  font-feature-settings: "tnum";
+  position: relative;
+  background: #fff;
+  border-radius: 2px;
+
+  &-arrow {
+    /*箭头动画：open*/
+    .arrow-open {
+      outline: none;
+      transition: 0.3s;
+      transition-property: all;
+      transform: rotate(0deg);
+    }
+
+    /*箭头动画：close*/
+    .arrow-close {
+      outline: none;
+      transition: 0.3s;
+      transition-property: all;
+      transform: rotate(-90deg);
+    }
+  }
+
+  &-head {
+    min-height: 48px;
+    margin-bottom: -1px;
+    padding: 0 24px;
+    color: #000000d9;
+    font-weight: 500;
+    font-size: 16px;
+    background: 0 0;
+    border-bottom: 1px solid #f0f0f0;
+    border-radius: 2px 2px 0 0;
+    &-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    &-title {
+      display: inline-block;
+      flex: 1;
+      padding: 16px 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+  &-body {
+    padding: 24px;
+    transition: all 500ms;
+    &-collapse{
+      overflow: hidden;
+    }
+  }
+  &-actions {
+    margin: 0;
+    list-style: none;
+    background: #fff;
+    border-top: 1px solid #f0f0f0;
+
+    & > li {
+      float: left;
+      margin: 12px 0;
+      color: rgba(0, 0, 0, 0.45);
+      text-align: center;
+
+      > span {
+        position: relative;
+        display: block;
+        min-width: 32px;
+        font-size: 14px;
+        line-height: 1.5715;
+        cursor: pointer;
+
+        &:hover {
+          color: #1890ff;
+          transition: color 0.3s;
+        }
+      }
+    }
+  }
+}
+.MyCard-bordered {
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
