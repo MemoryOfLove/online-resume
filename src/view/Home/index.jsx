@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
-import Header from '../../compoments/Header'
-import Resume from '../../compoments/Resume'
+import Header from '../../containers/Header'
+import Resume from '../../containers/Resume'
 export default function Home() {
   return (
     <Fragment>

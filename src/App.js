@@ -6,9 +6,9 @@ import { Route, Router, Routes } from "react-router-dom";
 import Introduction from "./view/Introduction";
 import Home from "./view/Home";
 
+
 function App() {
   return (
-
     <Routes>
       <Route path="/" element={<Introduction />}></Route>
       <Route path="/home" element={<Home />}></Route>
