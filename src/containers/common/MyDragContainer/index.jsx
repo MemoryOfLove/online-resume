@@ -10,14 +10,16 @@ export default function MyDragContainer(props) {
   };
   //交换两个拖拽panel
   const handleSwitchPanel = (state, value) => {
+    console.log('contraller',state,value);
     const index0 = state.findIndex((val)=>{return val.props.id===value[0]});
     const index1 = state.findIndex((val)=>{return val.props.id===value[1]});
-    if(index0===index1){
+    //禁止跨层
+    if(index0<0||index1<0||index0===index1){
       return [...state];
     }
     const min=Math.min(index0,index1);
     const max=Math.max(index0,index1);
-
+    
     return [...state.slice(0,min),state[max],...state.slice(min+1,max),state[min],...state.slice(max+1,state.length)];
   };
   //删除

@@ -11,7 +11,10 @@ import Post from "./components/Post";
 import Project from "./components/Project";
 import Work from "./components/Work";
 
-function TemplateOne() {
+import { connect } from "react-redux";
+
+function TemplateOne(props) {
+  const userInfo=props.state.userInfo;
   // 必须带有id，以方便导出时获取DOM元素内容
   return (
     <div className="a4-box">
@@ -23,9 +26,9 @@ function TemplateOne() {
           </div>
           <div className="fillColor" />
           <div className="baseData">
-            <BaseInfo />
-            <Contact />
-            <Job />
+            <BaseInfo userInfo={userInfo}/>
+            <Contact userInfo={userInfo}/>
+            <Job userInfo={userInfo}/>
             <Certificate />
           </div>
         </div>
@@ -43,5 +46,14 @@ function TemplateOne() {
     </div>
   );
 }
+const mapStateToProps = (state, ownProps) => {
+  console.log(state, ownProps);
+  return {state,ownProps};
+};
 
-export default TemplateOne;
+const mapDispatchToProps = (dispatch) => {
+  return {
+
+  };
+}
+export default connect(mapStateToProps, mapDispatchToProps)(TemplateOne);

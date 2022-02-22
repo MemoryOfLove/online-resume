@@ -145,6 +145,22 @@ const UserInfo = (props) => {
               </Form.Item>
             </Col>
           </Row>
+          <Row justify="space-around">
+            <Col span={11}>
+              <Form.Item name="HighestEducation" label="最高学历" {...config.HighestEducation}>
+                <Input disabled={disable}></Input>
+              </Form.Item>
+            </Col>
+
+            <Col span={11}>
+              <Form.Item name="nativePlace" label="籍贯" {...config.nativePlace}>
+                <Input disabled={disable}></Input>
+              </Form.Item>
+            </Col>
+          </Row>
+
+
+
           <Row>
             <Space>
               <MyButton style={{ marginRight: "20px" }} onClick={handleOnClick}>

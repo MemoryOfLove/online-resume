@@ -9,13 +9,16 @@ export default function MyDragPanel(props) {
   const { children, id, style = {} } = props;
   const handleDrag = (e) => {
     console.log("onDrag", e);
+    e.stopPropagation();
   };
   const handleDragEnter = (e) => {
     console.log("onDragEnter", e);
+    e.stopPropagation();
   };
   const handleDragStart = (e) => {
     e.dataTransfer.setData("panelID", id); //保存数据--该img元素的id
     console.log("onDragStart", id, e);
+    e.stopPropagation();
     return false;
   };
   const handleOnDrop = (e) => {
@@ -23,7 +26,7 @@ export default function MyDragPanel(props) {
     const dstID = id;
     dispach({ type: "switchPanel", value: [sourceID, dstID] });
     console.log("OnDrop");
-    console.log();
+    e.stopPropagation();
   };
   return (
     <div

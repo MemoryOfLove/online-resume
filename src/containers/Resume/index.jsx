@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import MyScrollBox from "../common/MyScrollBox";
 import UserInfo from "./UserInfo";
 import PersonalAdvantage from "./PersonalAdvantage";
+import EducationBackground from "./EducationBackground";
 import "./index.less";
 import MyDragPanel from "../common/MyDragContainer/MyDragPanel";
 import MyDragContainer from "../common/MyDragContainer";
@@ -19,6 +20,9 @@ export default function Resume({ style }) {
             </MyDragPanel>
             <MyDragPanel id="personalAdvantage">
               <PersonalAdvantage></PersonalAdvantage>
+            </MyDragPanel>
+            <MyDragPanel id="educationBackground">
+              <EducationBackground></EducationBackground>
             </MyDragPanel>
           </MyDragContainer>
         {/* </MyScrollBox> */}
