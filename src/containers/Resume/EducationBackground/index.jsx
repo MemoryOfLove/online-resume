@@ -1,16 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Row, Col, Space } from "antd";
 import MyButton from "../../common/MyButton";
 import MyCard from "../../common/MyCard";
 import "./index.less";
-import Avatar from "../../common/Avatar";
 import MyDragPanel from "../../common/MyDragContainer/MyDragPanel";
 import MyDragContainer from "../../common/MyDragContainer";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  add_educationAction,
+  del_educationAction,
+  update_educationAction,
+} from "../../../redux/actions";
+import { Alert } from 'antd';
 
+import EducationItem from "./EducationItem";
+import { render } from "less";
 const { TextArea } = Input;
-export default function EducationBackground() {
+const EducationBackground = (props) => {
   const [disable, setIsDisable] = useState(true);
   const [showText, setShowText] = useState("编辑");
+  const educationList = useSelector((state) => state.educationBackground);
+  const [visible, setVisible] = useState(false);
+
+  const handleClose = () => {
+    setVisible(false);
+  };
+  const dispatch = useDispatch();
   const [form] = Form.useForm();
   const config = {
     advantage: {
@@ -45,7 +60,37 @@ export default function EducationBackground() {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
+  const handleAddEducation = () => {
+    let index=educationList.findIndex((val) => {
+      return val.schoolName === "未填写学校名称";
+    })
+    console.log(index);;
+    if (
+      index < 0
+    ) {
+      console.log('可以创建');
+      dispatch(add_educationAction({ schoolName: "未填写学校名称" }));
+    } else {
+      //禁止创建新的背景
+      console.log('不可以创建');
+      setVisible(true);
+    }
+  };
+  let showList = [];
 
+  if (educationList && educationList.length > 0) {
+    showList = educationList.map((val) => {
+      console.log(val);
+      return (
+        <MyDragPanel id={val.schoolName} key={val.schoolName}>
+          <EducationItem
+            key={val.schoolName}
+            educationInfo={val}
+          ></EducationItem>
+        </MyDragPanel>
+      );
+    });
+  }
 
   return (
     <div className="EducationBackground">
@@ -55,27 +100,32 @@ export default function EducationBackground() {
         bordered={true}
         showArrow={true}
       >
-        <Form form={form} onFinish={onFinish} layout="vertical">
-          
-        <MyDragContainer>
-            <MyDragPanel id="MyCard1">
-                <div>test1</div>
-              
-            </MyDragPanel>
-            <MyDragPanel id="MyCard2">
-            <div>test2</div>
-            </MyDragPanel>
-          </MyDragContainer>
-
-          <Row>
-            <Space>
-              <MyButton style={{ marginRight: "20px" }} onClick={handleOnClick}>
-                {showText}
-              </MyButton>
-            </Space>
-          </Row>
-        </Form>
+        {/* <MyDragContainer> */}
+        {showList}
+        {/* </MyDragContainer> */}
+        <span className="addEducation" onClick={handleAddEducation}>
+          <a>添加新的教育经历</a>
+          {visible ? (
+            <Alert
+              message="当前名字已经存在,请更换名字"
+              type="error"
+              closable
+              afterClose={handleClose}
+            />
+          ) : null}
+        </span>
       </MyCard>
     </div>
   );
-}
+};
+// const mapStateToProps = (state, ownState) => {
+//   return { state, ownState };
+// };
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     addEducation: (val) => dispatch(add_educationAction(val)),
+//     delEducation: (val) => dispatch(del_educationAction(val)),
+//     updateEducation: (val) => dispatch(update_educationAction(val)),
+//   };
+// };
+export default EducationBackground;

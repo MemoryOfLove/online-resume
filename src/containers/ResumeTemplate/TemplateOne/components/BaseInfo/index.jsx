@@ -23,7 +23,6 @@ const BaseInfo=(props)=> {
   );
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log(state, ownProps);
   return {state,ownProps};
 };
 

@@ -12,6 +12,7 @@ export default function MyCard(props) {
     bodyStyle = {},
     showArrow = true,
     title,
+    title2,
     bordered = true,
     size: customizeSize,
     type,
@@ -22,14 +23,13 @@ export default function MyCard(props) {
     ...others
   } = props;
   let head;
-  
-  const [collapse, setCollapse] = useState(false);
-  const handleCollapse=()=>{
-    setCollapse((value)=>{
-      return !value;
-    })
-  }
 
+  const [collapse, setCollapse] = useState(false);
+  const handleCollapse = () => {
+    setCollapse((value) => {
+      return !value;
+    });
+  };
 
   const renderArrow = () => {
     return (
@@ -68,21 +68,26 @@ export default function MyCard(props) {
     );
   };
 
-
   if (title || extra) {
     head = (
       <div className={`${prefixCls}-head`} style={headStyle}>
         <div className={`${prefixCls}-head-wrapper`}>
-          {title && (
-            <div className={`${prefixCls}-head-title`}>
-              <strong>{title}</strong>
-            </div>
-          )}
-          {extra && <div className={`${prefixCls}-extra`}>{extra}</div>}
-          {showArrow && (
-            <div className={`${prefixCls}-arrow`}>{renderArrow()}</div>
-          )}
+
+            {title && (
+              <div className={`${prefixCls}-head-title`}>
+                <strong>{title}</strong>
+              </div>
+            )}
+            {extra && <div className={`${prefixCls}-extra`}>{extra}</div>}
+            {showArrow && (
+              <div className={`${prefixCls}-arrow`}>{renderArrow()}</div>
+            )}
         </div>
+        {title2 &&(
+            <div className={`${prefixCls}-head-title2`}>
+              {title2}
+          </div>
+          )}
       </div>
     );
   }
@@ -103,11 +108,8 @@ export default function MyCard(props) {
   });
 
   const body = (
-    <MyCollapsePanel collapse={collapse} >
-      <div
-        className={bodyClass}
-        style={(bodyStyle)}
-      >
+    <MyCollapsePanel collapse={collapse}>
+      <div className={bodyClass} style={bodyStyle}>
         {children}
       </div>
     </MyCollapsePanel>

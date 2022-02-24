@@ -12,7 +12,6 @@ const UserInfo = (props) => {
   const [disable, setIsDisable] = useState(true);
   const [showText, setShowText] = useState("编辑");
   const [form] = Form.useForm();
-  console.log(props.updateInfo);
   const {updateInfo,userInfo} = props;
 
 
@@ -169,20 +168,19 @@ const UserInfo = (props) => {
             </Space>
           </Row>
         </Form>
+
       </MyCard>
     </div>
   );
 };
 
 const mapStateToProps = (state, ownProps) => {
-  console.log(state, ownProps);
   return ownProps;
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     updateInfo: (val) => {
-      console.log("update_userInfo",update_userInfo)
       dispatch(update_userInfo(val))},
   };
 };

@@ -63,7 +63,7 @@ export default function MyCollapsePanel(props) {
   const [collapseOriginalHeight,setCollapseOriginalHeight]=useState('auto');
   useEffect(()=>{
     setCollapseOriginalHeight(`${collapsePanel.current.scrollHeight}px`);
-  },[]);
+  },[children]);
 
   const header = (
     <div className={`${prefixCls}-head`} style={headStyle}>

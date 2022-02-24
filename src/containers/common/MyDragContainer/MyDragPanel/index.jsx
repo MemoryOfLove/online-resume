@@ -6,7 +6,7 @@ export default function MyDragPanel(props) {
   const dispach = useContext(DragPanelContext);
   const [dragable, setDragable] = useState(false);
 
-  const { children, id, style = {} } = props;
+  const { children, id, style = {},actionPos={} } = props;
   const handleDrag = (e) => {
     console.log("onDrag", e);
     e.stopPropagation();
@@ -41,7 +41,7 @@ export default function MyDragPanel(props) {
       onDrop={handleOnDrop}
     >
       <span className="Action">
-        <img src={drag} width="20px"></img>
+        <img src={drag} width="20px" style={actionPos}></img>
       </span>
 
       {children}

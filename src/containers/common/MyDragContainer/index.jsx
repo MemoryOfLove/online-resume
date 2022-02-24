@@ -1,26 +1,36 @@
 import React, { useEffect, useReducer } from "react";
 import MyDragPanel from "./MyDragPanel";
-import './index.less'
+import "./index.less";
 export const DragPanelContext = React.createContext();
 export default function MyDragContainer(props) {
-  const panelListInitialState = [];
+  console.log("controller:",props.children);
   //在最后添加
   const handleAddPanels = (state, value) => {
     return [...state, ...value];
   };
   //交换两个拖拽panel
   const handleSwitchPanel = (state, value) => {
-    console.log('contraller',state,value);
-    const index0 = state.findIndex((val)=>{return val.props.id===value[0]});
-    const index1 = state.findIndex((val)=>{return val.props.id===value[1]});
+    console.log("contraller", state, value);
+    const index0 = state.findIndex((val) => {
+      return val.props.id === value[0];
+    });
+    const index1 = state.findIndex((val) => {
+      return val.props.id === value[1];
+    });
     //禁止跨层
-    if(index0<0||index1<0||index0===index1){
+    if (index0 < 0 || index1 < 0 || index0 === index1) {
       return [...state];
     }
-    const min=Math.min(index0,index1);
-    const max=Math.max(index0,index1);
-    
-    return [...state.slice(0,min),state[max],...state.slice(min+1,max),state[min],...state.slice(max+1,state.length)];
+    const min = Math.min(index0, index1);
+    const max = Math.max(index0, index1);
+
+    return [
+      ...state.slice(0, min),
+      state[max],
+      ...state.slice(min + 1, max),
+      state[min],
+      ...state.slice(max + 1, state.length),
+    ];
   };
   //删除
   const handleDeletePanel = (state, value) => {
@@ -40,15 +50,15 @@ export default function MyDragContainer(props) {
     }
   };
   const { children } = props;
-
-  children.map((val, index) => {
-    // console.log(val)
-    //保证必须是MyDragPanel才可以
-    if (val.type !== MyDragPanel) {
-      throw "抱歉,本组件必须和MyDragPanel一起使用";
-    }
-  });
-
+  if (Array.isArray(children)&&children.length>0) {
+    children.map((val, index) => {
+      // console.log(val)
+      //保证必须是MyDragPanel才可以
+      if (val!=undefined&&val.type !== MyDragPanel) {
+        throw "抱歉,本组件必须和MyDragPanel一起使用";
+      }
+    });
+  }
   const [panelList, dispach] = useReducer(panelListReducer, children);
 
   return (

@@ -18,12 +18,15 @@ export default function Resume({ style }) {
             <MyDragPanel id="userInfo">
               <UserInfo></UserInfo>
             </MyDragPanel>
+
             <MyDragPanel id="personalAdvantage">
               <PersonalAdvantage></PersonalAdvantage>
             </MyDragPanel>
+
             <MyDragPanel id="educationBackground">
               <EducationBackground></EducationBackground>
             </MyDragPanel>
+            
           </MyDragContainer>
         {/* </MyScrollBox> */}
       </div>

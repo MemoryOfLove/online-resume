@@ -3,7 +3,6 @@
   background-color: var(--card-color);
 }
 
-
 .MyCard {
   box-sizing: border-box;
   margin: 0;
@@ -59,11 +58,26 @@
       white-space: nowrap;
       text-overflow: ellipsis;
     }
+    &-title2 {
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center;
+      color: #747680;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      font-size: 14px;
+      font-weight: 400;
+      margin-top: 0px;
+      margin-bottom: 14px;
+    }
   }
   &-body {
     padding: 24px;
     transition: all 500ms;
-    &-collapse{
+    &-collapse {
       overflow: hidden;
     }
   }

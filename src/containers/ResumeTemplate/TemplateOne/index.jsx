@@ -7,7 +7,7 @@ import Job from "./components/Job";
 import Certificate from "./components/Certificate";
 import Synopsis from "./components/Synopsis";
 import Skill from "./components/Skill";
-import Post from "./components/Post";
+import EducationBackground from "./components/EducationBackground";
 import Project from "./components/Project";
 import Work from "./components/Work";
 
@@ -37,7 +37,7 @@ function TemplateOne(props) {
           <Synopsis />
           <div className="listData">
             <Skill />
-            <Post />
+            <EducationBackground />
             <Project />
             <Work />
           </div>
@@ -47,7 +47,6 @@ function TemplateOne(props) {
   );
 }
 const mapStateToProps = (state, ownProps) => {
-  console.log(state, ownProps);
   return {state,ownProps};
 };
 
