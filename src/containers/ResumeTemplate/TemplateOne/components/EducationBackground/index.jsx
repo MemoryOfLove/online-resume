@@ -2,6 +2,7 @@ import "./index.less";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
+
 function EducationBackground() {
   const educationList = useSelector((state) => state.educationBackground);
   const formatTime = (timeArray) => {
@@ -29,28 +30,6 @@ function EducationBackground() {
             </div>
             )
           })}
-          {/* <div className="template-one-educationItem">
-            <div className="bar">
-              <div className="schoolName">XX大学</div>
-              <div className="schoolStage">学历</div>
-              <div className="major">专业</div>
-              <div className="time">时间</div>
-            </div>
-            <div className="experience">
-
-            </div>
-          </div> */}
-
-          {/* <div className="education-background-left">
-            <p>2016.09-2017.09</p>
-            <p>XXX</p>
-          </div>
-          <div className="education-background-right">
-            <p>XXX</p>
-            <p>
-              XXX
-            </p>
-          </div> */}
         </li>
       </ul>
     </div>

@@ -29,3 +29,42 @@ export const add_educationAction=(val)=>{
         value:val
     }
 }
+
+
+export const update_projectAction=(name)=>{
+    return {
+        type:'update_project',
+        value:name
+    }
+}
+export const del_projectAction=(name)=>{
+    return {
+        type:'del_project',
+        value:name
+    }
+}
+export const add_projectAction=(val)=>{
+    return {
+        type:'add_project',
+        value:val
+    }
+}
+
+export const update_workAction=(name)=>{
+    return {
+        type:'update_work',
+        value:name
+    }
+}
+export const del_workAction=(name)=>{
+    return {
+        type:'del_work',
+        value:name
+    }
+}
+export const add_workAction=(val)=>{
+    return {
+        type:'add_work',
+        value:val
+    }
+}

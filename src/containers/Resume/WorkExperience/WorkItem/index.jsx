@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import deleteIcon from '../../../../assets/deleteIcon.png'
 import "./index.less";
 import {
-  del_educationAction,
-  update_educationAction,
+  del_workAction,
+  update_workAction,
 } from "../../../../redux/actions";
 
 
@@ -17,22 +17,22 @@ const { Option } = Select;
 const { RangePicker } = DatePicker;
 const { TextArea } = Input;
 
-export default function EducationItem(props) {
+export default function WorkItem(props) {
   const [disable, setIsDisable] = useState(true);
   const [showText, setShowText] = useState("编辑");
   const [form] = Form.useForm();
-  const { schoolName, schoolStage, time, major, experience } =
-    props.educationInfo;
+  const {companyName, workRole, time, workDescription } =
+    props.workInfo;
 
-  const educationList = useSelector((state) => {
-    return state.educationBackground.find((val) => {
-      return val.schoolName === schoolName;
+  const workList = useSelector((state) => {
+    return state.work.find((val) => {
+      return val.companyName === companyName;
     });
   });
-  console.log(educationList);
+
   const dispatch = useDispatch();
-  const delCurrentEducation=()=>{
-    dispatch(del_educationAction({ schoolName: schoolName }));
+  const delCurrentProject=()=>{
+    dispatch(del_workAction({ companyName: companyName }));
   }
 
   const handleOnClick = () => {
@@ -47,8 +47,8 @@ export default function EducationItem(props) {
         .then((values) => {
           console.log(values);
           //修改redux
-          dispatch(update_educationAction({
-            index:schoolName,
+          dispatch(update_workAction({
+            index:companyName,
             value:values
           }))
           setShowText("修改");
@@ -69,20 +69,17 @@ export default function EducationItem(props) {
     console.log("Failed:", errorInfo);
   };
   const config = {
-    schoolName: {
-      rules: [{ type: "string", required: true, message: "请输入学校名称!" }],
+    companyName: {
+      rules: [{ type: "string", required: true, message: "请输入公司名称!" }],
     },
-    schoolStage: {
-      rules: [{ type: "string", required: true, message: "请输入学历!" }],
+    workRole: {
+      rules: [{ type: "string", required: true, message: "请输入职位!" }],
     },
     time: {
-      rules: [{ required: true, message: "请输入学习时间" }],
+      rules: [{ required: true, message: "请输入工作时间" }],
     },
-    major: {
-      rules: [{ type: "string", required: true, message: "请输入专业" }],
-    },
-    experience: {
-      rules: [{ type: "string", required: true, message: "请输入个人经历" }],
+    workDescription: {
+      rules: [{ type: "string", required: true, message: "请输入工作描述" }],
     },
   };
   const formatTime = (timeArray) => {
@@ -93,56 +90,43 @@ export default function EducationItem(props) {
   const title2 = () => {
     return (
       <p className="title-two">
-        <span>{schoolStage ? schoolStage : "学历"}</span>
+        <span>{workRole ? workRole : "职位"}</span>
         <span className="divide-line"></span>{" "}
-        <span>{major ? major : "专业"}</span>
-        <span className="divide-line"></span>{" "}
-        <span>{time ? formatTime(time) : "在校时间"}</span>
+        <span>{time ? formatTime(time) : "工作时间"}</span>
       </p>
     );
   };
   return (
     <MyCard 
-    extra={<div onClick={delCurrentEducation} style={{marginRight:'45px'}}><img src={deleteIcon} style={{width:'20px'}}></img></div>}
-        
-    title={schoolName} bordered={false} title2={title2()}>
+    extra={<div onClick={delCurrentProject} style={{marginRight:'45px'}}><img src={deleteIcon} style={{width:'20px'}}></img></div>}
+    title2={title2()}
+    title={companyName} bordered={true} >
       <Form
         form={form}
         onFinish={onFinish}
         layout="vertical"
-        initialValues={{ schoolName, schoolStage, time, major, experience }}
+        initialValues={{ companyName, workRole, time, workDescription}}
       >
         <Row justify="space-around">
           <Col span={11}>
             <Form.Item
-              name="schoolName"
-              label=" 学校名称"
-              {...config.schoolName}
+              name="companyName"
+              label=" 公司名称"
+              {...config.companyName}
             >
               <Input disabled={disable}></Input>
             </Form.Item>
           </Col>
 
           <Col span={11}>
-            <Form.Item name="schoolStage" label="学历" {...config.schoolStage}>
-              <Select
-                style={{ width: "100%" }}
-                disabled={disable}
-                placeholder="请选择性别"
-              >
-                <Option value="初中及以下">初中及以下</Option>
-                <Option value="中专/中技">中专/中技</Option>
-                <Option value="高中">高中</Option>
-                <Option value="本科">本科</Option>
-                <Option value="硕士">硕士</Option>
-                <Option value="博士">博士</Option>
-              </Select>
+            <Form.Item name="workRole" label="职位" {...config.workRole}>
+            <Input disabled={disable}></Input>
             </Form.Item>
           </Col>
         </Row>
         <Row justify="space-around">
-          <Col span={11}>
-            <Form.Item name="time" label="时间段" {...config.time}>
+          <Col span={23}>
+            <Form.Item name="time" label="工作时间" {...config.time}>
               <RangePicker
                 style={{ width: "100%" }}
                 disabled={disable}
@@ -151,23 +135,18 @@ export default function EducationItem(props) {
               />
             </Form.Item>
           </Col>
-          <Col span={11}>
-            <Form.Item name="major" label="专业" {...config.major}>
-              <Input disabled={disable} placeholder="请输入专业"></Input>
-            </Form.Item>
-          </Col>
         </Row>
         <Row justify="space-around">
           <Col span={23}>
             <Form.Item
-              name="experience"
-              label=" 在校经历"
-              {...config.experience}
+              name="workDescription"
+              label=" 工作描述"
+              {...config.workDescription}
             >
               <TextArea
                 disabled={disable}
                 rows={5}
-                placeholder="请输入在校经历"
+                placeholder="请输入详细信息"
                 maxLength={350}
               />
             </Form.Item>

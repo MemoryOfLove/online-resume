@@ -11,7 +11,7 @@ const BaseInfo=(props)=> {
 
   return (
     <div className="container">
-      <p className="title">基本信息 Basic</p>
+      <p className="title">基本信息</p>
       <ul className="content">
         <li>姓名：{userInfo.name?userInfo.name:'默认名字'}</li>
         <li>性别：{userInfo.sex?format(userInfo.sex):'隐私'}</li>

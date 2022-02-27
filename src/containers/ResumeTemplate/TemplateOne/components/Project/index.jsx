@@ -6,33 +6,35 @@
  */
 import React from 'react';
 import './index.less';
-
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
 function Project() {
+  const projectList = useSelector((state) => state.project);
+  const formatTime = (timeArray) => {
+    return `${moment(timeArray[0]).format("YYYY-MM")}-${moment(
+      timeArray[1]
+    ).format("YYYY-MM")}`;
+  };
+
   return (
     <div className="content">
-      <p className="label">项目经历 Project</p>
+      <p className="label">项目经历</p>
       <ul className="list">
         <li className="flex">
-          <div className="project-left">
-            <p>
-              <span>2021.09 - 2021.12</span>
-            </p>
-          </div>
-          <div className="project-right">
-            <p>
-              <span>XXX -前端</span>
-            </p>
-          </div>
-          <div className="text">
-            <ul className="item-box">
-              <li className="item-content">
-                <span>XXX</span>
-              </li>
-              <li className="item-content">
-                <span>XXX</span>
-              </li>
-            </ul>
-          </div>
+          {projectList.map((val)=>{
+            return (
+              <div className="template-one-educationItem" key={val.schoolName}>
+              <div className="bar">
+                <div className="projectName">{val.projectName}</div>
+                <div className="projectRole">{val.projectRole?val.projectRole:'项目角色'}</div>
+                <div className="time">{val.time?formatTime(val.time):'时间'}</div>
+              </div>
+              <div className="projectDescription">
+              {val.projectDescription?val.projectDescription:'经历'}
+              </div>
+            </div>
+            )
+          })}
         </li>
       </ul>
     </div>

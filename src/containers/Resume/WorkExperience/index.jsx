@@ -7,20 +7,18 @@ import MyDragPanel from "../../common/MyDragContainer/MyDragPanel";
 import MyDragContainer from "../../common/MyDragContainer";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  add_educationAction,
-  del_educationAction,
-  update_educationAction,
+  add_workAction,
 } from "../../../redux/actions";
 import { Alert } from 'antd';
 
 
-import EducationItem from "./EducationItem";
+import WorkItem from "./WorkItem";
 import { render } from "less";
 const { TextArea } = Input;
-const EducationBackground = (props) => {
+const WorkExperience = (props) => {
   const [disable, setIsDisable] = useState(true);
   const [showText, setShowText] = useState("编辑");
-  const educationList = useSelector((state) => state.educationBackground);
+  const workList = useSelector((state) => state.work);
   const [visible, setVisible] = useState(false);
 
   const handleClose = () => {
@@ -30,16 +28,16 @@ const EducationBackground = (props) => {
   const [form] = Form.useForm();
 
 
-  const handleAddEducation = () => {
-    let index=educationList.findIndex((val) => {
-      return val.schoolName === "未填写学校名称";
+  const handleAddWorkExperience = () => {
+    let index=workList.findIndex((val) => {
+      return val.companyName === "未填写公司名称";
     })
     console.log(index);;
     if (
       index < 0
     ) {
       console.log('可以创建');
-      dispatch(add_educationAction({ schoolName: "未填写学校名称" }));
+      dispatch(add_workAction({ companyName: "未填写公司名称" }));
     } else {
       //禁止创建新的背景
       console.log('不可以创建');
@@ -48,31 +46,31 @@ const EducationBackground = (props) => {
   };
   let showList = [];
 
-  if (educationList && educationList.length > 0) {
-    showList = educationList.map((val) => {
+  if (workList && workList.length > 0) {
+    showList = workList.map((val) => {
       console.log(val);
       return (
-        <MyDragPanel id={val.schoolName} key={val.schoolName}>
-          <EducationItem
-            key={val.schoolName}
-            educationInfo={val}
-          ></EducationItem>
+        <MyDragPanel id={val.companyName} key={val.companyName}>
+          <WorkItem
+            key={val.companyName}
+            workInfo={val}
+          ></WorkItem>
         </MyDragPanel>
       );
     });
   }
 
   return (
-    <div className="EducationBackground">
+    <div className="WorkExperience">
       <MyCard
         style={{ margin: "10px" }}
-        title="教育背景"
+        title="工作经历"
         bordered={true}
         showArrow={true}
       >
         {showList}
-        <span className="addEducation" onClick={handleAddEducation}>
-          <a>添加新的教育经历</a>
+        <span className="addWork" onClick={handleAddWorkExperience}>
+          <a>添加新的工作经历</a>
           {visible ? (
             <Alert
               message="当前名字已经存在,请更换名字"
@@ -86,4 +84,4 @@ const EducationBackground = (props) => {
     </div>
   );
 };
-export default EducationBackground;
+export default WorkExperience;
